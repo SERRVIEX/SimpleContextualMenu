@@ -4,7 +4,7 @@ namespace SimpleContextualMenu.Items
 
     public abstract class ItemDataBase
     {
-        public bool IsActive { get; set; }
+        public bool IsActive { get; protected set; }
         public UnityAction OnClick { get; protected set; }
 
         // Constructors

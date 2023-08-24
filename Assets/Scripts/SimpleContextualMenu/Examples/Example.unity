@@ -193,7 +193,8 @@ MonoBehaviour:
   _content: {fileID: 758213006}
   _contextualMenuPrefab: {fileID: 8087655604263038843, guid: 4a5e4cad7462800478c4c21c5c23152f, type: 3}
   _separatorPrefab: {fileID: 8915651379177360770, guid: f61440ccee2021a4daf8a18712edc090, type: 3}
-  _itemPrefabs: []
+  _itemPrefabs:
+  - {fileID: 1931193244648082229, guid: 6a15357dc3fbc3f488efec4419b52747, type: 3}
 --- !u!4 &586235681
 Transform:
   m_ObjectHideFlags: 0
@@ -221,6 +222,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d91225021e4d1c43bb07110bace9618, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _open: {fileID: 21300000, guid: d0e2e8b069bf05648858b284017bd481, type: 3}
+  _save: {fileID: 21300000, guid: f8961a21232b2bd4bbabf9549c499ebc, type: 3}
+  _render: {fileID: 21300000, guid: c0aa157a17afbca4b870466753966120, type: 3}
+  _layout: {fileID: 21300000, guid: 22bcd9627fc75154ea058baf074a6da9, type: 3}
 --- !u!1 &649219462
 GameObject:
   m_ObjectHideFlags: 0

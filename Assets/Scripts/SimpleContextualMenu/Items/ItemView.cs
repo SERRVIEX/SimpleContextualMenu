@@ -8,8 +8,7 @@ namespace SimpleContextualMenu.Items
     public abstract class ItemView<T> : ItemViewBase where T : ItemDataBase
     {
         protected T Data { get; private set; }
-        protected ContextualMenu Submenu { get; private set; }
-
+       
         // Methods
 
         public override void Set(string title, ItemDataBase data)

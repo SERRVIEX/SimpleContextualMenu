@@ -15,12 +15,13 @@ namespace SimpleContextualMenu
 
         [field: SerializeField] public RectTransform RectTransform { get; private set; }
         [field: SerializeField] public Image Background { get; private set; }
-        [field: SerializeField] public GameObject Lock { get; private set; }
-        [field: SerializeField] public MenuView View { get; private set; }
-        public MenuData Data { get; private set; }
 
-        [field: SerializeField] public ContextualMenu Parent { get; private set; }
-        [field: SerializeField] public ContextualMenu Child { get; private set; }
+        [SerializeField] private GameObject _lock;
+        [SerializeField] private MenuView _view;
+        private MenuData _data;
+
+        public ContextualMenu Parent { get; private set; }
+        public ContextualMenu Child { get; private set; }
 
         // Constructors
 
@@ -34,24 +35,19 @@ namespace SimpleContextualMenu
             Vector3 localPosition = value;
             localPosition.z = 0;
             ContextualMenu menu = ContextualMenuManager.Create();
-            menu.View.RectTransform.SetAnchor(Anchor.TopLeft);
-            menu.View.RectTransform.SetPivot(Pivot.TopLeft);
-            menu.View.RectTransform.localPosition = localPosition;
+            menu._view.RectTransform.SetAnchor(Anchor.TopLeft);
+            menu._view.RectTransform.SetPivot(Pivot.TopLeft);
+            menu._view.RectTransform.localPosition = localPosition;
             return menu;
-        }
-
-        public enum Position
-        {
-            Left, Right, Top, Down
         }
 
         public static ContextualMenu Create(RectTransform referenceRect, Position position, Vector2 offset = default)
         {
             Vector3 localPosition = CalculatePosition(referenceRect, position, offset);
             ContextualMenu menu = ContextualMenuManager.Create();
-            menu.View.RectTransform.SetAnchor(Anchor.TopLeft);
-            menu.View.RectTransform.SetPivot(Pivot.TopLeft);
-            menu.View.RectTransform.localPosition = localPosition;
+            menu._view.RectTransform.SetAnchor(Anchor.TopLeft);
+            menu._view.RectTransform.SetPivot(Pivot.TopLeft);
+            menu._view.RectTransform.localPosition = localPosition;
             return menu;
         }
 
@@ -90,21 +86,21 @@ namespace SimpleContextualMenu
 
         public void Set(ContextualMenu parent, MenuData data)
         {
-            Data = data;
+            _data = data;
             Parent = parent;
             Parent.Child = this;
 
             transform.SetParent(parent.RectTransform);
             Background.raycastTarget = false;
-            Lock.SetActive(false);
+            _lock.SetActive(false);
         }
 
         public void Add<T1, T2>(string path, T1 data, T2 view) 
             where T1 : ItemDataBase
             where T2 : ItemViewBase
         {
-            if(Data == null)
-                Data = new MenuData();
+            if(_data == null)
+                _data = new MenuData();
 
             if (string.IsNullOrEmpty(path))
                 throw new Exception("Path can't be null or empty.");
@@ -116,10 +112,10 @@ namespace SimpleContextualMenu
                     if (string.IsNullOrEmpty(items[i]))
                         throw new Exception("Path can't have a null or empty node.");
 
-                CreateTree(Data, data, view, 0, items);
+                CreateTree(_data, data, view, 0, items);
             }
             else
-                CreateTree(Data, data, view, 0, path);
+                CreateTree(_data, data, view, 0, path);
         }
 
         private void CreateTree<T1, T2>(MenuData parent, T1 data, T2 view, int index, params string[] items)
@@ -174,7 +170,7 @@ namespace SimpleContextualMenu
         {
             if(string.IsNullOrEmpty(path))
             {
-                Data.Separators.Add(Data.Children.Count);
+                _data.Separators.Add(_data.Children.Count);
                 return;
             }
             ItemMetadata menuItemData = GetMenuItem(path);
@@ -192,10 +188,10 @@ namespace SimpleContextualMenu
                     if (string.IsNullOrEmpty(items[i]))
                         throw new Exception("Path can't have a null or empty node.");
 
-                menuItemData = GetMenuItem(Data, 0, items);
+                menuItemData = GetMenuItem(_data, 0, items);
             }
             else
-                menuItemData = GetMenuItem(Data, 0, path);
+                menuItemData = GetMenuItem(_data, 0, path);
 
             return menuItemData;
         }
@@ -219,7 +215,7 @@ namespace SimpleContextualMenu
 
         public void Build()
         {
-            Build(Data);
+            Build(_data);
         }
 
         private void Build(MenuData menuData)
@@ -227,15 +223,15 @@ namespace SimpleContextualMenu
             for (int i = 0; i < menuData.Children.Count; i++)
             {
                 ItemMetadata metadata = menuData.Children[i];
-                ItemViewBase view = Instantiate(metadata.View, View.transform);
+                ItemViewBase view = Instantiate(metadata.View, _view.transform);
                 view.Link(this, metadata);
                 view.Set(metadata.Title, metadata.Data);
             }
 
             for (int i = menuData.Separators.Count - 1; i >= 0; i--)
             {
-                Transform separator = Instantiate(ContextualMenuManager.GetSeparator(), View.transform).transform;
-                separator.SetSiblingIndex(menuData.Separators[i]);
+                Transform separator = Instantiate(ContextualMenuManager.GetSeparator(), _view.transform).transform;
+                separator.SetSiblingIndex(menuData.Separators[i] + 1);
             }
         }
 
@@ -277,6 +273,16 @@ namespace SimpleContextualMenu
         public void OnPointerExit(PointerEventData eventData)
         {
             Selected = null;
+        }
+
+        // Other
+
+        public enum Position
+        {
+            Left, 
+            Right, 
+            Top, 
+            Down
         }
     }
 }

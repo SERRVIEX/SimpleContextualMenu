@@ -284,6 +284,7 @@ GameObject:
   - component: {fileID: 8087655603099274314}
   - component: {fileID: 8087655603099274315}
   - component: {fileID: 8087655603099274319}
+  - component: {fileID: 3748390640632543720}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -310,7 +311,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -100, y: 0}
-  m_SizeDelta: {x: 200, y: 0}
+  m_SizeDelta: {x: 250, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &8087655603099274312
 CanvasRenderer:
@@ -406,6 +407,20 @@ MonoBehaviour:
   _background: {fileID: 8087655603099274313}
   _layoutGroup: {fileID: 8087655603099274314}
   _sizeFitter: {fileID: 8087655603099274315}
+--- !u!114 &3748390640632543720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8087655603099274325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding: {x: 0, y: 0, z: 0, w: 0}
+  m_Softness: {x: 0, y: 0}
 --- !u!1 &8087655603930626051
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,5 +741,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <RectTransform>k__BackingField: {fileID: 8087655604263038788}
-  <Lock>k__BackingField: {fileID: 1582902844639293558}
-  <View>k__BackingField: {fileID: 8087655603099274319}
+  <Background>k__BackingField: {fileID: 8087655604263038842}
+  _lock: {fileID: 1582902844639293558}
+  _view: {fileID: 8087655603099274319}
+  <Parent>k__BackingField: {fileID: 0}
+  <Child>k__BackingField: {fileID: 0}

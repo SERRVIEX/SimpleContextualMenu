@@ -6,10 +6,24 @@ namespace SimpleContextualMenu.Items
 
     using TMPro;
 
+    using SimpleContextualMenu.Internal;
+
     public abstract class ItemViewBase : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler
     {
+        /// <summary>
+        /// Reference to the menu.
+        /// </summary>
         protected ContextualMenu Menu { get; private set; }
+
+        /// <summary>
+        /// All the data intended for this item.
+        /// </summary>
         protected ItemMetadata Metadata { get; private set; }
+
+        /// <summary>
+        /// Opened submenu if it has it.
+        /// </summary>
+        protected ContextualMenu Submenu;
 
         [field: SerializeField] protected RectTransform RectTransform { get; private set; }
         [field: SerializeField] protected Image Background { get; private set; }
@@ -18,12 +32,15 @@ namespace SimpleContextualMenu.Items
 
         // Methods
 
-        public void Link(ContextualMenu menu, ItemMetadata metadata)
+        internal void Link(ContextualMenu menu, ItemMetadata metadata)
         {
             Menu = menu;
             Metadata = metadata;
         }
             
+        /// <summary>
+        /// Fill the item with the data.
+        /// </summary>
         public abstract void Set(string title, ItemDataBase data);
 
         public abstract void OnPointerEnter(PointerEventData eventData);
