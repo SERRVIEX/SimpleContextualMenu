@@ -10,10 +10,13 @@
 ![.NET 4.x Scripting Runtime](https://img.shields.io/badge/.NET-4.x-blueviolet.svg?style=flat&cacheSeconds=2592000)
 
 ## Description
-A contextual menu manager for Unity applications. 
+A contextual menu manager for Unity applications where you can configure on your own.
+
+![alt text](https://github.com/SERRVIEX/SimpleSpritePacker/blob/main/github_assets/asset_0.png)
+![alt text](https://github.com/SERRVIEX/SimpleSpritePacker/blob/main/github_assets/asset_1.png)
 
 ## How to use?
-It is in development yet.
+There in the assets you can find Examples folder with a scene where you can see how to configure it.
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

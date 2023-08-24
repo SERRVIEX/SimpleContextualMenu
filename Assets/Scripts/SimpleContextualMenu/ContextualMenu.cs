@@ -29,6 +29,9 @@ namespace SimpleContextualMenu
 
         // Methods
 
+        /// <summary>
+        /// Create a contextual menu at mouse position.
+        /// </summary>
         public static ContextualMenu Create(Vector3 mousePosition)
         {
             RectTransformUtility.ScreenPointToLocalPointInRectangle(ContextualMenuManager.Content, mousePosition, ContextualMenuManager.Camera, out Vector2 value);
@@ -41,19 +44,22 @@ namespace SimpleContextualMenu
             return menu;
         }
 
-        public static ContextualMenu Create(RectTransform referenceRect, Position position, Vector2 offset = default)
+        /// <summary>
+        /// Create contextual menu toward another rect.
+        /// </summary>
+        public static ContextualMenu Create(RectTransform referenceRect, Position position)
         {
-            Vector3 localPosition = CalculatePosition(referenceRect, position, offset);
             ContextualMenu menu = ContextualMenuManager.Create();
+            Vector3 localPosition = menu.CalculatePosition(referenceRect, position);
             menu._view.RectTransform.SetAnchor(Anchor.TopLeft);
             menu._view.RectTransform.SetPivot(Pivot.TopLeft);
             menu._view.RectTransform.localPosition = localPosition;
             return menu;
         }
 
-        private static Vector3 CalculatePosition(RectTransform referenceRect, Position position, Vector2 offset)
+        private Vector3 CalculatePosition(RectTransform referenceRect, Position position)
         {
-            Vector3 positionOffset = new Vector3(offset.x, offset.y, 0);
+            Vector3 positionOffset = new Vector3(0, 2, 0);
             Vector3 worldPosition = referenceRect.TransformPoint(referenceRect.rect.center);
             Vector3 localPosition = ContextualMenuManager.Content.InverseTransformPoint(worldPosition);
             localPosition.z = 0;
@@ -61,22 +67,22 @@ namespace SimpleContextualMenu
             switch (position)
             {
                 case Position.Left:
-                    localPosition.y += referenceRect.rect.height / 2f;
+                    localPosition.y += referenceRect.rect.height / 2f + positionOffset.y / 2;
                     localPosition += Vector3.left * (referenceRect.rect.width / 2 + positionOffset.x);
                     break;
 
                 case Position.Right:
-                    localPosition.y += referenceRect.rect.height / 2f;
+                    localPosition.y += referenceRect.rect.height / 2f + positionOffset.y / 2;
                     localPosition += Vector3.right * (referenceRect.rect.width / 2 + positionOffset.x);
                     break;
 
                 case Position.Top:
-                    localPosition.x += referenceRect.rect.width / 2f;
+                    localPosition.x -= referenceRect.rect.width / 2f + positionOffset.x / 2;
                     localPosition += Vector3.up * (referenceRect.rect.height / 2 + positionOffset.y);
                     break;
 
                 case Position.Down:
-                    localPosition.x += referenceRect.rect.width / 2f;
+                    localPosition.x -= referenceRect.rect.width / 2f + positionOffset.x / 2;
                     localPosition += Vector3.down * (referenceRect.rect.height / 2 + positionOffset.y);
                     break;
             }
@@ -235,13 +241,14 @@ namespace SimpleContextualMenu
             }
         }
 
-        private void OnValidate()
+        public void OnPointerEnter(PointerEventData eventData)
         {
-            if (RectTransform == null)
-                RectTransform = GetComponent<RectTransform>();
+            Selected = this;
+        }
 
-            if (Background == null)
-                Background = GetComponent<Image>();
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            Selected = null;
         }
 
         public void Dismiss()
@@ -256,7 +263,7 @@ namespace SimpleContextualMenu
 
         private void Dismiss(ContextualMenu menu)
         {
-            if(menu.Parent == null)
+            if (menu.Parent == null)
             {
                 Destroy(menu.gameObject);
                 return;
@@ -265,14 +272,13 @@ namespace SimpleContextualMenu
             Dismiss(menu.Parent);
         }
 
-        public void OnPointerEnter(PointerEventData eventData)
+        private void OnValidate()
         {
-            Selected = this;
-        }
+            if (RectTransform == null)
+                RectTransform = GetComponent<RectTransform>();
 
-        public void OnPointerExit(PointerEventData eventData)
-        {
-            Selected = null;
+            if (Background == null)
+                Background = GetComponent<Image>();
         }
 
         // Other
