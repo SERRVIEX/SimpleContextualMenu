@@ -1,5 +1,5 @@
 
-# \SimpleContextualMenu
+# SimpleContextualMenu
 
 ![Version](https://img.shields.io/badge/Version-v0.0.1-brightgreen.svg)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/SERRVIEX/SimpleWindows/blob/main/LICENSE) 
