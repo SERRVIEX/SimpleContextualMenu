@@ -12,8 +12,8 @@
 ## Description
 A contextual menu manager for Unity applications where you can configure on your own.
 
-![alt text](https://github.com/SERRVIEX/SimpleSpritePacker/blob/main/github_assets/asset_0.png)
-![alt text](https://github.com/SERRVIEX/SimpleSpritePacker/blob/main/github_assets/asset_1.png)
+![](https://github.com/SERRVIEX/SimpleContextualMenu/blob/main/github_assets/asset_0.png)
+![](https://github.com/SERRVIEX/SimpleContextualMenu/blob/main/github_assets/asset_1.png)
 
 ## How to use?
 There in the assets you can find Examples folder with a scene where you can see how to configure it.
