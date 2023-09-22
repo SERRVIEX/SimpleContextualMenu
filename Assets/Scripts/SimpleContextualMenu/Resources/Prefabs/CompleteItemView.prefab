@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 1931193243953298408}
   - component: {fileID: 1931193243953298411}
   m_Layer: 5
-  m_Name: Title
+  m_Name: Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -517,7 +517,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <RectTransform>k__BackingField: {fileID: 1931193244648082230}
   <Background>k__BackingField: {fileID: 1931193244648082231}
-  <Title>k__BackingField: {fileID: 1931193243953298411}
+  <Label>k__BackingField: {fileID: 1931193243953298411}
   <Arrow>k__BackingField: {fileID: 1931193244601338023}
   <Icon>k__BackingField: {fileID: 4696844619163278621}
   <HotKey>k__BackingField: {fileID: 5341809116299286620}

@@ -11,13 +11,13 @@ namespace SimpleContextualMenu.Items
        
         // Methods
 
-        public override void Set(string title, ItemDataBase data)
+        public override void Set(string label, ItemDataBase data)
         {
             Data = data as T;
-            Title.text = title;
+            Label.text = label;
 
             Background.color = Color.clear;
-            Title.color = data.IsActive ? new Color32(176, 176, 176, 255) : new Color32(97, 97, 97, 255);
+            Label.color = data.IsActive ? new Color32(176, 176, 176, 255) : new Color32(97, 97, 97, 255);
             Arrow.color = data.IsActive ? new Color32(97, 97, 97, 255) : new Color32(65, 65, 65, 255);
             Arrow.gameObject.SetActive(Metadata.Submenu != null);
         }
@@ -39,8 +39,8 @@ namespace SimpleContextualMenu.Items
                 Submenu.Build();
             }
 
-            Background.color = new Color32(71, 81, 89, 255);
-            Title.color = new Color32(239, 239, 239, 255);
+            Background.color = new Color32(87, 87, 87, 255);
+            Label.color = Color.white;
         }
 
         public override void OnPointerClick(PointerEventData eventData)
@@ -51,9 +51,6 @@ namespace SimpleContextualMenu.Items
             // We can't press on item with submenu, this is not a button.
             if (Metadata.Submenu != null)
                 return;
-
-            Background.color = new Color32(71, 81, 89, 255);
-            Title.color = new Color32(239, 239, 239, 255);
 
             Data.OnClick.Invoke();
             Menu.DismissRecursive();
@@ -67,7 +64,7 @@ namespace SimpleContextualMenu.Items
             StartCoroutine(OnPointerExitImpl());
 
             Background.color = Color.clear;
-            Title.color = new Color32(176, 176, 176, 255);
+            Label.color = new Color32(154, 154, 154, 255);
         }
 
         private IEnumerator OnPointerExitImpl()

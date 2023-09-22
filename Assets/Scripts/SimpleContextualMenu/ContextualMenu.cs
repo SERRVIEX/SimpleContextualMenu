@@ -179,6 +179,7 @@ namespace SimpleContextualMenu
                 _data.Separators.Add(_data.Children.Count);
                 return;
             }
+
             ItemMetadata menuItemData = GetMenuItem(path);
             MenuData menuData = menuItemData.Submenu;
             menuData.Separators.Add(menuData.Children.Count);
@@ -226,6 +227,8 @@ namespace SimpleContextualMenu
 
         private void Build(MenuData menuData)
         {
+            int initialChildCount = _view.transform.childCount;
+
             for (int i = 0; i < menuData.Children.Count; i++)
             {
                 ItemMetadata metadata = menuData.Children[i];
@@ -237,7 +240,7 @@ namespace SimpleContextualMenu
             for (int i = menuData.Separators.Count - 1; i >= 0; i--)
             {
                 Transform separator = Instantiate(ContextualMenuManager.GetSeparator(), _view.transform).transform;
-                separator.SetSiblingIndex(menuData.Separators[i] + 1);
+                separator.SetSiblingIndex(menuData.Separators[i] + initialChildCount);
             }
         }
 

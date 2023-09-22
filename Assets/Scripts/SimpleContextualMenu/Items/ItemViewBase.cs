@@ -27,7 +27,7 @@ namespace SimpleContextualMenu.Items
 
         [field: SerializeField] protected RectTransform RectTransform { get; private set; }
         [field: SerializeField] protected Image Background { get; private set; }
-        [field: SerializeField] protected TextMeshProUGUI Title { get; private set; }
+        [field: SerializeField] protected TextMeshProUGUI Label { get; private set; }
         [field: SerializeField] protected Image Arrow { get; private set; }
 
         // Methods
@@ -41,7 +41,7 @@ namespace SimpleContextualMenu.Items
         /// <summary>
         /// Fill the item with the data.
         /// </summary>
-        public abstract void Set(string title, ItemDataBase data);
+        public abstract void Set(string label, ItemDataBase data);
 
         public abstract void OnPointerEnter(PointerEventData eventData);
         public abstract void OnPointerClick(PointerEventData eventData);
